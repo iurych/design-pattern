@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma'
 import { requestBodySchema } from '@/schema/user'
+import { register } from '@/use-case/register'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export const registerUserController = async (
@@ -9,15 +9,11 @@ export const registerUserController = async (
   // valida os dados recebidos pela request
   const { email, name, password } = requestBodySchema.parse(request.body)
 
-  // cria o usuário no banco de dados
-  await prisma.user.create({
-    data: {
-      email,
-      name,
-      password_hash: password,
-    },
-  })
-
+  try {
+    await register({ email, name, password })
+  } catch (error) {
+    return reply.status(409).send()
+  }
   // retorna a resposta do banco de dados
   return reply.status(201).send()
 }
