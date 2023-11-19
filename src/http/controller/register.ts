@@ -1,6 +1,8 @@
+import { PrismaUsersRepository } from '@/repositories/users-repository'
 import { requestBodySchema } from '@/schema/user'
-import { register } from '@/use-case/register'
+import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { register } from 'module'
 
 export const registerUserController = async (
   request: FastifyRequest,
@@ -10,7 +12,10 @@ export const registerUserController = async (
   const { email, name, password } = requestBodySchema.parse(request.body)
 
   try {
-    await register({ email, name, password })
+    const prismaUsersRepository = new PrismaUsersRepository()
+    const resgisterUserCase = new RegisterUseCase(prismaUsersRepository) // instancio a classe passando por parâmetro as dependências
+
+    await resgisterUserCase.execute({ email, name, password })
   } catch (error) {
     return reply.status(409).send()
   }
