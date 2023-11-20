@@ -18,7 +18,7 @@ export const registerUserController = async (
     await resgisterUserCase.execute({ email, name, password })
   } catch (error) {
     if (error instanceof UserAlreadyExistsError) {
-      return reply.status(409).send()
+      return reply.status(409).send({ message: error.message })
     }
     return reply.status(500).send() // TODO fix me
   }
