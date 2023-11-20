@@ -1,8 +1,8 @@
-import { PrismaUsersRepository } from '@/repositories/users-repository'
+import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository'
 import { requestBodySchema } from '@/schema/user'
+import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
 import { RegisterUseCase } from '@/use-cases/register'
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { register } from 'module'
 
 export const registerUserController = async (
   request: FastifyRequest,
@@ -17,7 +17,10 @@ export const registerUserController = async (
 
     await resgisterUserCase.execute({ email, name, password })
   } catch (error) {
-    return reply.status(409).send()
+    if (error instanceof UserAlreadyExistsError) {
+      return reply.status(409).send()
+    }
+    return reply.status(500).send() // TODO fix me
   }
   // retorna a resposta do banco de dados
   return reply.status(201).send()
