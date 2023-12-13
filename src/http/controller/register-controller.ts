@@ -13,9 +13,9 @@ export const registerUserController = async (
 
   try {
     const prismaUsersRepository = new PrismaUsersRepository()
-    const resgisterUserCase = new RegisterUseCase(prismaUsersRepository) // instancio a classe passando por parâmetro as dependências
+    const registerUserCase = new RegisterUseCase(prismaUsersRepository) // instancio a classe passando por parâmetro as dependências
 
-    await resgisterUserCase.execute({ email, name, password })
+    await registerUserCase.execute({ email, name, password })
   } catch (error) {
     if (error instanceof UserAlreadyExistsError) {
       return reply.status(409).send({ message: error.message })
