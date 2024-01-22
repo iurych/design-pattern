@@ -13,7 +13,8 @@ describe('Get User profile use case', () => {
     sut = new AuthenticateUseCase(usersRepository)
   })
 
-  it.only('it should be possible to get a user profile', async () => {
+  it('it should be possible to get a user profile', async () => {
+    
     const { user } = await sut.execute({
       email: 'johndoe@example.com',
       password: '123456',
@@ -31,7 +32,7 @@ describe('Get User profile use case', () => {
     }).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
-  it.only('it should be able to authenticate with wrong password', async () => {
+  it('it should be able to authenticate with wrong password', async () => {
     await usersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
