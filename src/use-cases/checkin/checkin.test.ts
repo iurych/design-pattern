@@ -14,14 +14,6 @@ describe('CheckIn Use Case', () => {
     gymsRepository = new InMemoryUsersRepository()
     sut = new CheckInUseCase(checkInRepository, gymsRepository)
 
-    vi.useFakeTimers()
-  })
-
-  afterEach(() => {
-    vi.useRealTimers()
-  })
-
-  it('it should be able to check-in', async () => {
     gymsRepository.items.push({
       id: 'gym-01',
       title: 'Ginásio Teste',
@@ -31,6 +23,14 @@ describe('CheckIn Use Case', () => {
       longitude: new Decimal(0),
     })
 
+    vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('it should be able to check-in', async () => {
     vi.setSystemTime(new Date(2022, 0, 20, 8, 0, 0))
 
     const { checkIn } = await sut.execute({
