@@ -1,7 +1,7 @@
 import type { Gym } from '@prisma/client'
 import { GymsRepository } from './../../repositories/gym-repository'
 
-interface CreateGymUseCaseRequest {
+interface CreateGymUser {
   title: string
   description: string | null
   phone: string | null
@@ -22,7 +22,7 @@ export class CreateGymUseCase {
     phone,
     latitude,
     longitude,
-  }: CreateGymUseCaseRequest): Promise<CreateGymUseCaseResponse> {
+  }: CreateGymUser): Promise<CreateGymUseCaseResponse> {
     // inversão de dependência
     const gym = await this.gymsRepository.create({
       title,
