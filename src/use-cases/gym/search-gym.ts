@@ -1,39 +1,27 @@
 import type { Gym } from '@prisma/client'
 import { GymsRepository } from './../../repositories/gym-repository'
 
-interface CreateGymUser {
-  title: string
-  description: string | null
-  phone: string | null
-  latitude: number
-  longitude: number
+interface searchGymUseCaseRequest {
+  search: string
+  page: number
 }
 
-interface CreateGymUseCaseResponse {
-  gym: Gym
+interface searchGymUseCaseResponse {
+  gyms: Gym[]
 }
 
-export class CreateGymUseCase {
+export class SearchGymUseCase {
   constructor(private gymsRepository: GymsRepository) {}
 
   async execute({
-    title,
-    description,
-    phone,
-    latitude,
-    longitude,
-  }: CreateGymUser): Promise<CreateGymUseCaseResponse> {
+    search,
+    page,
+  }: searchGymUseCaseRequest): Promise<searchGymUseCaseResponse> {
     // inversão de dependência
-    const gym = await this.gymsRepository.create({
-      title,
-      description,
-      phone,
-      latitude,
-      longitude,
-    })
+    const gyms = await this.gymsRepository.searchMany(search, page)
 
     return {
-      gym,
+      gyms,
     }
   }
 }
