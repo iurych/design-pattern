@@ -1,8 +1,7 @@
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
-import { getDistanceBetweenCoordinates } from '@/utils/get-distance-btw-coor'
 import { CheckIn } from '@prisma/client'
-import { MaxDistanceError } from '../errors/max-distance-error'
-import { MaxNumberOfCheckInsError } from '../errors/max-number-of-check-ins-error'
+import dayjs from 'dayjs'
+import { InvalidCheckInAfter20Minutes } from '../errors/invalid-check0in-after-20-minutes'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface ValidadeUseCaseRequest {
@@ -23,6 +22,15 @@ export class ValidadeUseCase {
 
     if (!checkIn) {
       throw new ResourceNotFoundError()
+    }
+
+    const twentyOnyMinutesOfDiferenceInCheckInCreation = dayjs(new Date()).diff(
+      checkIn.created_at,
+      'minutes',
+    )
+
+    if (twentyOnyMinutesOfDiferenceInCheckInCreation > 20) {
+      throw new InvalidCheckInAfter20Minutes()
     }
 
     checkIn.validated_at = new Date() // como estou alterando um dado do checkIn, eu preciso salvar no banco de dados
