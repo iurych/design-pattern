@@ -16,3 +16,8 @@ Content-Type: 'application/json
   "email":"example2@gmail.com",
   "password":"123456"
 }
+
+###
+
+GET http://localhost:3333/profile
+Authorization: Bearer token
