@@ -1,0 +1,18 @@
+POST http://localhost:3333/sessions
+Content-Type: 'application/json'
+
+{
+  "email":"example2@gmail.com",
+  "password":"123456"
+}
+
+###
+
+POST http://localhost:3333/users
+Content-Type: 'application/json
+
+{
+  "name":"teste middleware 8",
+  "email":"example2@gmail.com",
+  "password":"123456"
+}
