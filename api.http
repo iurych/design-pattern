@@ -2,7 +2,7 @@ POST http://localhost:3333/sessions
 Content-Type: 'application/json'
 
 {
-  "email":"example3@gmail.com",
+  "email":"example4@gmail.com",
   "password":"123456"
 }
 
@@ -13,11 +13,11 @@ Content-Type: 'application/json
 
 {
   "name":"teste",
-  "email":"example3@gmail.com",
+  "email":"example4@gmail.com",
   "password":"123456"
 }
 
 ###
 
 GET http://localhost:3333/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxZjM3NThmOC0yNzU5LTRlYjItYmI1ZC04YWQ3Njg3MTI3YjkiLCJpYXQiOjE3MDg0NzMzNzF9.gVqzBKz1CkmMZn07D5GV_pQ2qDOuMWaeW0eOOSA5AVE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5NzkzZWRhYy05NmU1LTRhYTYtYjE1ZS02Y2ViMTM2ZjM2ZmUiLCJpYXQiOjE3MDg0NzUxNTB9.37d39LAXbBAf5EWBIWyUUHVuOxinNOvbBFVbcBeum1g
