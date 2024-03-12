@@ -7,8 +7,6 @@ export const profileUserController = async (
   request: FastifyRequest,
   reply: FastifyReply,
 ): Promise<z.infer<typeof responseProfileSchema>> => {
-  await request.jwtVerify()
-
   const getUserProfile = makeGetUserProfileUseCase()
   const { user } = await getUserProfile.execute({
     userId: request.user.sub,
@@ -17,7 +15,5 @@ export const profileUserController = async (
   const userWithoutPassword = responseProfileSchema.parse(user)
   delete userWithoutPassword.password_hash
 
-  return reply.status(200).send({
-    userWithoutPassword,
-  })
+  return reply.status(200).send(userWithoutPassword)
 }
