@@ -4,7 +4,7 @@ export default <Environment>{
   name: 'prisma',
   transformMode: 'ssr',
   async setup() {
-    console.log('Executou')
+    console.log('Setup')
 
     return {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
