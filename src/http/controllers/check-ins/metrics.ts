@@ -1,7 +1,7 @@
 import { makeGetUserNumberOfCheckInsUseCase } from '@/use-cases/factories/make-get-user-number-of-check-ins-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-export const historyController = async (
+export const metricsController = async (
   request: FastifyRequest,
   reply: FastifyReply,
 ) => {

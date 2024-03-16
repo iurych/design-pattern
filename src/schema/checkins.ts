@@ -16,3 +16,7 @@ export const requestCheckInsBodySchema = z.object({
 export const checkInHistoryQuerySchema = z.object({
   page: z.coerce.number().min(1).default(1),
 })
+
+export const validateCheckInParamsSchema = z.object({
+  checkInId: z.string().uuid(),
+})
