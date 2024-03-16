@@ -7,8 +7,8 @@ import { verifyJWT } from '../controllers/middlewares/virifyjwt'
 
 export const checkInsRoutes = async (app: FastifyInstance) => {
   app.addHook('onRequest', verifyJWT)
-  app.get('check-ins/history', historyController)
-  app.get('check-ins/metrics', metricsController)
+  app.get('/check-ins/history', historyController)
+  app.get('/check-ins/metrics', metricsController)
   app.post('/gyms/:gymsId/check-ins', createCheckInsController)
   app.patch('/check-ins/:checkInId/validate', validateController)
 }
