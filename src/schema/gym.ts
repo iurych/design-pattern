@@ -11,3 +11,17 @@ export const requestGymBodySchema = z.object({
     return Math.abs(value) <= 180
   }),
 })
+
+export const searchGymQuerySchema = z.object({
+  search: z.string(),
+  page: z.coerce.number().min(1).default(1),
+})
+
+export const searchNearbyGymQuerySchema = z.object({
+  latitude: z.number().refine((value) => {
+    return Math.abs(value) <= 90
+  }),
+  longitude: z.number().refine((value) => {
+    return Math.abs(value) <= 180
+  }),
+})
