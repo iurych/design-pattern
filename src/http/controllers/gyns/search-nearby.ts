@@ -7,7 +7,9 @@ export const searchNearbyGymController = async (
   reply: FastifyReply,
 ) => {
   // valida os dados recebidos pela request
-  const { latitude, longitude } = searchNearbyGymQuerySchema.parse(request.body)
+  const { latitude, longitude } = searchNearbyGymQuerySchema.parse(
+    request.query,
+  )
 
   const searchNearbyGymUseCase = makeSearchNearbyGymUseCase()
 

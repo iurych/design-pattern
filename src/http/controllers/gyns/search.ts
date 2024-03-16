@@ -7,7 +7,7 @@ export const searchGymController = async (
   reply: FastifyReply,
 ) => {
   // valida os dados recebidos pela request
-  const { search, page } = searchGymQuerySchema.parse(request.body)
+  const { search, page } = searchGymQuerySchema.parse(request.query)
 
   const searchGymUseCase = makeSearchGymUseCase()
 
