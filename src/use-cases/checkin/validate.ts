@@ -34,7 +34,6 @@ export class ValidadeUseCase {
     }
 
     checkIn.validated_at = new Date() // como estou alterando um dado do checkIn, eu preciso salvar no banco de dados
-
     return {
       checkIn,
     }

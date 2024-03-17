@@ -15,5 +15,7 @@ export const validateController = async (
     checkInId,
   })
 
+  // console.log('response: ', response)
+
   return reply.status(204).send()
 }
