@@ -22,8 +22,8 @@ describe('Search nearby gyms (e2e)', () => {
         title: 'JavaScript Gym',
         description: 'Some description.',
         phone: '1199999999',
-        latitude: -22.8739733,
-        longitude: -43.3584274,
+        latitude: -27.2092052,
+        longitude: -49.6401091,
       })
 
     await request(app.server)
@@ -33,17 +33,20 @@ describe('Search nearby gyms (e2e)', () => {
         title: 'Typescript Gym',
         description: 'Some description.',
         phone: '1199999999',
-        latitude: -22.6343319,
-        longitude: -43.1964332,
+        latitude: -27.0610928,
+        longitude: -49.5229501,
       })
 
     const response = await request(app.server)
       .get('/gyms/nearby')
       .query({
-        latitude: -22.8739733,
-        longitude: -43.3584274,
+        latitude: -27.2092052,
+        longitude: -49.6401091,
       })
       .set('Authorization', `Bearer ${token}`)
+      .send()
+
+    // console.log(response)
 
     expect(response.statusCode).toEqual(200)
     expect(response.body.gyms).toHaveLength(1)

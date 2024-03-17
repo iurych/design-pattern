@@ -9,8 +9,6 @@ export const searchGymController = async (
   // valida os dados recebidos pela request
   const { search, page } = searchGymQuerySchema.parse(request.query)
 
-  console.log(search)
-
   const searchGymUseCase = makeSearchGymUseCase()
 
   const { gyms } = await searchGymUseCase.execute({

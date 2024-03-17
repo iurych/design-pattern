@@ -15,13 +15,9 @@ export class PrismaGymsRepository implements GymsRepository {
   async findManyGymsNearby(params: FindManyNearbyParams) {
     const { latitude, longitude } = params
     const gyms = await prisma.$queryRaw<Gym[]>`
-      SELECT * FROM gym
-      WHERE
-        earth_box(ll_to_earth(${latitude}, ${longitude}), 1000) @> ll_to_earth(latitude, longitude)
+      SELECT * from gyms
+      WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
     `
-    // SELECT * from gyms
-    // WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
-
     return gyms
   }
 
