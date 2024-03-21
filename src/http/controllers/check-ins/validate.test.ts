@@ -18,8 +18,6 @@ describe('Validate Check-in (e2e)', () => {
 
     const user = await prisma.user.findFirstOrThrow()
 
-    // console.log('user: ', user)
-
     const gym = await prisma.gym.create({
       data: {
         title: 'JavaScript Gym',
@@ -28,8 +26,6 @@ describe('Validate Check-in (e2e)', () => {
       },
     })
 
-    // console.log('gym: ', gym)
-
     let checkIn = await prisma.checkIn.create({
       data: {
         gym_id: gym.id,
@@ -37,14 +33,10 @@ describe('Validate Check-in (e2e)', () => {
       },
     })
 
-    // console.log('checkIn: ', checkIn)
-
     const response = await request(app.server)
       .patch(`/check-ins/${checkIn.id}/validate`)
       .set('Authorization', `Bearer ${token}`)
       .send()
-
-    console.log(response)
 
     expect(response.statusCode).toEqual(204)
 

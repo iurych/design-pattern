@@ -33,7 +33,10 @@ export class ValidadeUseCase {
       throw new InvalidCheckInAfter20Minutes()
     }
 
-    checkIn.validated_at = new Date() // como estou alterando um dado do checkIn, eu preciso salvar no banco de dados
+    checkIn.validated_at = new Date() // como estou alterando um dado do checkIn, eu preciso salvar no banco de dados com o método save()
+
+    await this.checkInsRepository.save(checkIn)
+
     return {
       checkIn,
     }
