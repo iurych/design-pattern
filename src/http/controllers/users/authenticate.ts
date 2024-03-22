@@ -15,7 +15,7 @@ export const authenticateUserController = async (
     const { user } = await authenticateUseCase.execute({ email, password })
 
     const token = await reply.jwtSign(
-      {},
+      { role: user.role },
       {
         sign: {
           sub: user.id,
@@ -24,7 +24,7 @@ export const authenticateUserController = async (
     )
 
     const refreshToken = await reply.jwtSign(
-      {},
+      { role: user.role },
       {
         sign: {
           sub: user.id,
